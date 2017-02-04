@@ -7,16 +7,22 @@ public class Path
 
     public void TryAddStep(Floor floor, Color color)
     {
-        if( _steps.Count > 1 && _steps[ _steps.Count-2 ] == floor )
+        if( _steps.Count > 1 && _steps[ _steps.Count - 2 ] == floor )
         {
-            floor.SetColor( Color.white );
-            _steps[ _steps.Count - 1 ].SetColor( Color.white );
+            if( !(_steps[ _steps.Count - 1 ] is Target) && !(_steps[ _steps.Count - 1 ] is Wall) )
+                _steps[ _steps.Count - 1 ].SetColor( Color.white );
 
             _steps.RemoveAt( _steps.Count - 1 );
             return;
         }
+
+        if( HasWall() )
+        {
+            return;
+        }
+
         _steps.Add( floor );
-        if( !(floor is Target) )
+        if( !(floor is Target) && !(floor is Wall) )
             floor.SetColor( color );
     }
 
@@ -25,11 +31,23 @@ public class Path
         return _steps.Count > 0 && _steps[ _steps.Count - 1 ] is Target;
     }
 
+    private bool HasWall()
+    {
+        foreach (var floor in _steps)
+        {
+            if( floor is Wall )
+                return true;
+        }
+        return false;
+    }
+
     public void Clear()
     {
         foreach(var step in _steps)
         {
             if( step is Target )
+                continue;
+            if( step is Wall )
                 continue;
             step.SetColor( Color.white );
         }
@@ -47,7 +65,7 @@ public class Path
     {
         if( _steps.Count > 0 )
         {
-            if( !(_steps[ 0 ] is Target) )
+            if( !(_steps[ 0 ] is Target) && !(_steps[ 0 ] is Wall) )
                 _steps[0].SetColor( Color.white );
             _steps.RemoveAt( 0 );
         }

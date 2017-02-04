@@ -2,6 +2,8 @@
 
 public class Floor : MonoBehaviour
 {
+    public Unit unit;
+
     private SpriteRenderer _renderer;
 
     void Start()
