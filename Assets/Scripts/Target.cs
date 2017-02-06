@@ -1,4 +1,4 @@
 ﻿
-public class Target : Floor
+public class Target : Cell
 {
 }

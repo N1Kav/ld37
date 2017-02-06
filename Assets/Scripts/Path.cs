@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Path
 {
-    private List<Floor> _steps = new List<Floor>();
+    private List<Cell> _steps = new List<Cell>();
 
-    public void TryAddStep(Floor floor, Color color)
+    public void TryAddStep( Cell floor, Color color)
     {
         if( _steps.Count > 1 && _steps[ _steps.Count - 2 ] == floor )
         {
-            if( !(_steps[ _steps.Count - 1 ] is Target) && !(_steps[ _steps.Count - 1 ] is Wall) )
+            if( _steps[ _steps.Count - 1 ] is Floor )
                 _steps[ _steps.Count - 1 ].SetColor( Color.white );
 
             _steps.RemoveAt( _steps.Count - 1 );
@@ -22,7 +22,7 @@ public class Path
         }
 
         _steps.Add( floor );
-        if( !(floor is Target) && !(floor is Wall) )
+        if( floor is Floor )
             floor.SetColor( color );
     }
 
@@ -45,16 +45,13 @@ public class Path
     {
         foreach(var step in _steps)
         {
-            if( step is Target )
-                continue;
-            if( step is Wall )
-                continue;
-            step.SetColor( Color.white );
+            if( step is Floor )
+                step.SetColor( Color.white );
         }
         _steps.Clear();
     }
 
-    public Floor GetFirst()
+    public Cell GetFirst()
     {
         if( _steps.Count > 0 )
             return _steps[ 0 ];
@@ -65,7 +62,7 @@ public class Path
     {
         if( _steps.Count > 0 )
         {
-            if( !(_steps[ 0 ] is Target) && !(_steps[ 0 ] is Wall) )
+            if( _steps[ 0 ] is Floor )
                 _steps[0].SetColor( Color.white );
             _steps.RemoveAt( 0 );
         }

@@ -1,3 +1,4 @@
-﻿public class Wall : Floor
+﻿
+public class Wall : Cell
 {
 }

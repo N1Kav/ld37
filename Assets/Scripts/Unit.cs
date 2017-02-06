@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour
         Main.Instance.currentUnit = this;
     }
 
-    public void TryAddStep(Floor floor)
+    public void TryAddStep( Cell floor )
     {
         path.TryAddStep( floor, color );
     }
@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour
 
         var floor = path.GetFirst();
 
-        if (floor.unit != null)
+        if( floor.unit != null )
         {
             Boom();
             floor.unit.Boom();
