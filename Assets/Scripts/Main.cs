@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class Main : MonoBehaviour
 {
     static public Main Instance;
 
+    [SerializeField]
+    private Transform _missionsPanel;
+    [SerializeField]
+    private MissionUI _missionUIPrefab;
+
+    [NonSerialized]
     public Unit currentUnit;
 
     private bool _mouseDown;
@@ -11,6 +19,11 @@ public class Main : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
+
     }
 
     void Update()
