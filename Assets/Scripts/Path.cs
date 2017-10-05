@@ -7,13 +7,28 @@ public class Path
 
     public void TryAddStep( Cell floor, Color color)
     {
-        if( _steps.Count > 1 && _steps[ _steps.Count - 2 ] == floor )
+        if (_steps.Count > 0 && _steps[_steps.Count - 1] == floor)
+            return;
+
+        if ( _steps.Count > 1 && _steps[ _steps.Count - 2 ] == floor )
         {
             if( _steps[ _steps.Count - 1 ] is Floor )
                 _steps[ _steps.Count - 1 ].SetColor( Color.white );
 
+            //Debug.Log("remove " + _steps[_steps.Count - 1].name);
+
             _steps.RemoveAt( _steps.Count - 1 );
+
+            //Debug.Log(ToString());
             return;
+        }
+
+        if (_steps.Count > 0)
+        {
+            var isDiagonal = _steps[_steps.Count - 1].transform.position.x != floor.transform.position.x &&
+                             _steps[_steps.Count - 1].transform.position.y != floor.transform.position.y;
+            if (isDiagonal)
+                return;
         }
 
         if( HasWall() )
@@ -24,6 +39,9 @@ public class Path
         _steps.Add( floor );
         if( floor is Floor )
             floor.SetColor( color );
+
+        //Debug.Log("add " + floor.name);
+        //Debug.Log(ToString());
     }
 
     public bool HasTarget()
@@ -71,5 +89,15 @@ public class Path
     public int Count()
     {
         return _steps.Count;
+    }
+
+    public override string ToString()
+    {
+        var result = "[ ";
+        foreach (var step in _steps)
+            result += step.name + ",";
+        result = result.TrimEnd(',');
+        result += " ]";
+        return result;
     }
 }
