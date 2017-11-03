@@ -5,12 +5,6 @@ public class Main : MonoBehaviour
 {
     public static Main Instance;
 
-    [SerializeField]
-    private Transform _missionsPanel;
-
-    [SerializeField]
-    private MissionUI _missionUIPrefab;
-
     [NonSerialized]
     public Unit currentUnit;
 
