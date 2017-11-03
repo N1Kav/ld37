@@ -6,23 +6,34 @@ public class Cell : MonoBehaviour
 
     private SpriteRenderer _renderer;
 
-    void Start()
+    private void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnMouseEnter()
+    private void OnMouseEnter()
     {
-        if( Main.Instance.IsMouseDown )
+        if ( Main.Instance.IsMouseDown )
         {
-            if( Main.Instance.currentUnit != null )
+            if ( Main.Instance.currentUnit != null )
             {
                 Main.Instance.currentUnit.TryAddStep( this );
             }
         }
     }
 
-    void OnMouseUp()
+    private void OnMouseOver()
+    {
+        if ( Main.Instance.IsMouseDown )
+        {
+            if ( Main.Instance.currentUnit != null )
+            {
+                Main.Instance.currentUnit.TryAddStep( this );
+            }
+        }
+    }
+
+    private void OnMouseUp()
     {
         Main.Instance.currentUnit = null;
     }

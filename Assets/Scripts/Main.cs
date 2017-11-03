@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using System;
 
 public class Main : MonoBehaviour
 {
-    static public Main Instance;
+    public static Main Instance;
 
     [SerializeField]
     private Transform _missionsPanel;
+
     [SerializeField]
     private MissionUI _missionUIPrefab;
 
@@ -16,28 +16,27 @@ public class Main : MonoBehaviour
 
     private bool _mouseDown;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
-
     }
 
-    void Update()
+    private void Update()
     {
-        if( Input.GetMouseButtonDown( 0 ) )
+        if ( Input.GetMouseButtonDown( 0 ) )
             _mouseDown = true;
 
-        if( Input.GetMouseButtonUp( 0 ) )
+        if ( Input.GetMouseButtonUp( 0 ) )
         {
             _mouseDown = false;
 
-            if( currentUnit != null )
+            if ( currentUnit != null )
             {
-                if( !currentUnit.path.HasTarget() )
+                if ( !currentUnit.path.HasTarget() )
                     currentUnit.path.Clear();
                 else
                     currentUnit.Move();
