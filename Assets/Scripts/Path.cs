@@ -19,7 +19,7 @@ public class Path
 
             _steps.RemoveAt( _steps.Count - 1 );
 
-            Debug.Log( ToString() );
+            //Debug.Log( ToString() );
             return;
         }
 
@@ -43,7 +43,7 @@ public class Path
             floor.SetColor( color );
 
         //Debug.Log("add " + floor.name);
-        Debug.Log( ToString() );
+        //Debug.Log( ToString() );
     }
 
     public bool HasTarget()

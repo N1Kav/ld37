@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MissionUI : MonoBehaviour
@@ -12,7 +10,5 @@ public class MissionUI : MonoBehaviour
 
     void Start()
     {
-        if (mission != null)
-            _text.text = mission.title;
     }
 }
