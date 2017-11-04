@@ -57,7 +57,10 @@ public class MissionManager : MonoBehaviour
         {
             mission.TimerTick();
             if (mission.GetTime() == 0)
+            {
                 removeItems.Add(mission);
+                MoneyManager.Instance.SubtractMoney(mission.GetPrice());
+            }
         }
 
         foreach(var mission in removeItems)
