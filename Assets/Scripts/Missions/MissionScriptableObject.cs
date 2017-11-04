@@ -5,6 +5,7 @@ public class MissionScriptableObject : ScriptableObject
 {
     public int id;
     public string title;
+    public int price;
     public Checkpoint[] checkpoints;
 }
 

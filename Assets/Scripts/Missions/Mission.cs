@@ -40,4 +40,9 @@ public class Mission
     {
         return _time;
     }
+
+    public int GetPrice()
+    {
+        return _pattern.price;
+    }
 }
