@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -20,6 +18,8 @@ public class MoneyManager : MonoBehaviour
     private void Start()
     {
         _money = 100;
+        if (onChangeMoney != null)
+            onChangeMoney();
     }
 
     public int GetMoney()

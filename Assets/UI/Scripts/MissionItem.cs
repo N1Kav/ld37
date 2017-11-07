@@ -7,6 +7,9 @@ public class MissionItem : MonoBehaviour
     private Text _text;
 
     [SerializeField]
+    private Text _price;
+
+    [SerializeField]
     private Text _time;
 
     private Mission _mission;
@@ -16,6 +19,8 @@ public class MissionItem : MonoBehaviour
         _mission = mission;
 
         _text.text = _mission.GetName();
+
+        _price.text = "$ " + _mission.GetPrice();
     }
 
     private void Update()
