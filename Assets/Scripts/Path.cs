@@ -42,7 +42,7 @@ public class Path
         if ( floor is Floor )
             floor.SetColor( color );
 
-        //Debug.Log("add " + floor.name);
+        Debug.Log("add " + floor.name);
         //Debug.Log( ToString() );
     }
 
@@ -92,6 +92,13 @@ public class Path
     {
         if ( _steps.Count > 0 )
             return _steps[0];
+        return null;
+    }
+
+    public Target GetTarget()
+    {
+        if (_steps.Count > 0)
+            return _steps[_steps.Count - 1] as Target;
         return null;
     }
 

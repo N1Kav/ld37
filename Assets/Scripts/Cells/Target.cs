@@ -11,4 +11,8 @@ public class Target : Cell
     };
 
     public TARGET id;
+
+    public void Use()
+    {
+    }
 }

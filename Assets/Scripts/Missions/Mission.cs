@@ -10,14 +10,10 @@ public class Mission
     [SerializeField]
     private int _time;
 
-    [SerializeField]
-    private int _currentCheckpointIndex;
-
     public Mission(MissionScriptableObject pattern, int time)
     {
         _pattern = pattern;
         _time = time;
-        _currentCheckpointIndex = 0;
     }
 
     public void TimerTick()
@@ -44,5 +40,10 @@ public class Mission
     public int GetPrice()
     {
         return _pattern.price;
+    }
+
+    public Checkpoint[] GetCheckpoints()
+    {
+        return _pattern.checkpoints;
     }
 }
