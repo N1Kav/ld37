@@ -100,6 +100,7 @@ public class Unit : MonoBehaviour
 
     private void TryIntercat( Target target )
     {
+        // wrong target
         if (_mission.GetCheckpoints()[_currentCheckpointIndex].type.id != target.id)
             return;
 
