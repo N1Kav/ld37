@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour
 
     private bool _boom;
 
+    private Cell _currentFloor;
+
     private void Start()
     {
         _reminder = Instantiate( _reminderPrefab, FindObjectOfType<Canvas>().transform );
@@ -54,28 +56,29 @@ public class Unit : MonoBehaviour
         if ( path.Count() < 1 )
             return;
 
+        if ( _currentFloor != null )
+            _currentFloor.unit = null;
+
         if ( _reminder != null )
             _reminder.SetTarget( path.GetTarget() );
 
-        var floor = path.GetFirst();
+        _currentFloor = path.GetFirst();
 
-        if ( floor.unit != null )
+        if (_currentFloor.unit != null && _currentFloor.unit != this )
         {
             Boom();
-            floor.unit.Boom();
+            _currentFloor.unit.Boom();
             return;
         }
 
-        floor.unit = this;
-        var pos = floor.transform.position;
+        _currentFloor.unit = this;
+        var pos = _currentFloor.transform.position;
         pos.z = this.transform.localPosition.z;
         this.transform.DOMove( pos, speed ).SetEase( Ease.Linear ).OnComplete( () =>
                                                                                {
-                                                                                   floor.unit = null;
-
                                                                                    if ( path.Count() < 1 )
                                                                                    {
-                                                                                       var target = floor as Target;
+                                                                                       var target = _currentFloor as Target;
                                                                                        if ( target != null )
                                                                                            TryIntercat(target);
                                                                                        return;
@@ -88,6 +91,7 @@ public class Unit : MonoBehaviour
 
     public void Boom()
     {
+        Debug.Log( "BOOM!!!" );
         _boom = true;
         path.Clear();
     }
@@ -100,6 +104,9 @@ public class Unit : MonoBehaviour
 
     private void TryIntercat( Target target )
     {
+        if (_mission == null)
+            return;
+
         // wrong target
         if (_mission.GetCheckpoints()[_currentCheckpointIndex].type.id != target.id)
             return;

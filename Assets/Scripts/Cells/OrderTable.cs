@@ -5,8 +5,10 @@ public class OrderTable : Target
 {
     [SerializeField]
     private Mission _mission;
-
     private MissionItem _missionItem;
+
+    [SerializeField]
+    private Unit _unit;
 
     private void Start()
     {
