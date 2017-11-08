@@ -20,11 +20,11 @@ public class Mission
     {
         _time--;
 
-        if (_time == 0)
+        /*if (_time == 0)
         {
             if (MissionManager.Instance.onRemoveMission!=null)
                 MissionManager.Instance.onRemoveMission(this);
-        }
+        }*/
     }
 
     public string GetName()

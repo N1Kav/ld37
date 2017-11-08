@@ -9,20 +9,20 @@ public class MissionPanel : MonoBehaviour
     private HorizontalLayoutGroup _layoutGroup;
 
     [SerializeField]
-    private MissionItem _prefab;
+    public MissionItem _prefab;
 
     private List<MissionItem> _items = new List<MissionItem>();
 
     private void Start()
     {
-        MissionManager.Instance.onAddMission += CreateItem;
-        MissionManager.Instance.onRemoveMission += RemoveItem;
+        //MissionManager.Instance.onAddMission += CreateItem;
+        //MissionManager.Instance.onRemoveMission += RemoveItem;
     }
 
     private void CreateItem(Mission mission)
     {
         var item = Instantiate<MissionItem>(_prefab, _layoutGroup.transform);
-        item.Load(mission);
+        item.Load(mission, null);
         _items.Add(item);
     }
 

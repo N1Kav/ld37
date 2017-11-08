@@ -6,17 +6,20 @@ public class MissionManager : MonoBehaviour
 {
     public static MissionManager Instance;
 
-    public delegate void AddMissionDelegate(Mission mission);
-    public AddMissionDelegate onAddMission;
+    //public delegate void AddMissionDelegate(Mission mission);
+    //public AddMissionDelegate onAddMission;
 
-    public delegate void RemoveMissionDelegate(Mission mission);
-    public RemoveMissionDelegate onRemoveMission;
+    //public delegate void RemoveMissionDelegate(Mission mission);
+    //public RemoveMissionDelegate onRemoveMission;
 
     [SerializeField]
     private List<MissionScriptableObject> _missionPatterns;
 
+    //[SerializeField]
+    //private List<Mission> _missions = new List<Mission>();
+
     [SerializeField]
-    private List<Mission> _missions = new List<Mission>();
+    public MissionItem missionPrefab;
 
     private void Awake()
     {
@@ -25,31 +28,33 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
-        GenerateNewMission();
-        StartCoroutine(GenerateNextMission());
-        StartCoroutine(UpdateMissions());
+        //GenerateNewMission();
+        //StartCoroutine(GenerateNextMission());
+        //StartCoroutine(UpdateMissions());
     }
 
-    private IEnumerator GenerateNextMission()
+    /*private IEnumerator GenerateNextMission()
     {
         var t = Random.Range(5f, 10f);
         yield return new WaitForSeconds(t);
 
         GenerateNewMission();
         StartCoroutine(GenerateNextMission());
-    }
+    }*/
 
-    private void GenerateNewMission()
+    public Mission GenerateNewMission()
     {
         var pattern = _missionPatterns.GetRandomElement();
         var mission = new Mission(pattern, Random.Range(10, 20));
-        _missions.Add( mission );
+        //_missions.Add( mission );
 
-        if (onAddMission != null)
-            onAddMission(mission);
+        //if (onAddMission != null)
+        //    onAddMission(mission);
+
+        return mission;
     }
 
-    private IEnumerator UpdateMissions()
+    /*private IEnumerator UpdateMissions()
     {
         var removeItems = new List<Mission>();
 
@@ -71,5 +76,5 @@ public class MissionManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(UpdateMissions());
-    }
+    }*/
 }
